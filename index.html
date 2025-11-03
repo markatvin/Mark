@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mark the Master Carpenter</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <style>
+      :root {
+        --wood-base: #c49a6c;
+        --deep-wood: #8b5e34;
+        --forest: #2f4f4f;
+        --light-wood: #f7e7ce;
+      }
+
+      body {
+        font-family: "Poppins", "Segoe UI", sans-serif;
+        background: repeating-linear-gradient(
+          135deg,
+          rgba(196, 154, 108, 0.1) 0,
+          rgba(196, 154, 108, 0.1) 20px,
+          rgba(247, 231, 206, 0.15) 20px,
+          rgba(247, 231, 206, 0.15) 40px
+        );
+      }
+
+      .hero-section {
+        position: relative;
+        color: #fff;
+        background: radial-gradient(circle at top left, rgba(47, 79, 79, 0.9), rgba(47, 79, 79, 0.6)),
+          url("https://images.unsplash.com/photo-1503389152951-9f343605f61e?auto=format&fit=crop&w=1600&q=80")
+            center/cover;
+        min-height: 75vh;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .hero-section::after {
+        content: "";
+        position: absolute;
+        inset: 10% 15% 0;
+        border: 2px dashed rgba(247, 231, 206, 0.5);
+        border-radius: 40% 60% 55% 45% / 60% 30% 40% 70%;
+        mix-blend-mode: screen;
+        pointer-events: none;
+      }
+
+      .hero-section .display-4 {
+        text-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      }
+
+      .swing-card {
+        transition: transform 0.5s ease, box-shadow 0.5s ease;
+        transform-origin: top center;
+      }
+
+      .swing-card:hover {
+        transform: rotateX(15deg) rotateY(-5deg) translateY(-10px);
+        box-shadow: 0 20px 35px rgba(0, 0, 0, 0.25);
+      }
+
+      .angled-edge {
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vw), 0 100%);
+      }
+
+      .angled-edge-bottom {
+        clip-path: polygon(0 4vw, 100% 0, 100% 100%, 0 100%);
+      }
+
+      .floating-menu .nav-link {
+        position: relative;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .floating-menu .nav-link::after {
+        content: attr(data-echo);
+        position: absolute;
+        inset: 0;
+        color: rgba(247, 231, 206, 0.4);
+        transform: translate(4px, 4px);
+        z-index: -1;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+
+      .floating-menu .nav-link:hover::after,
+      .floating-menu .nav-link:focus::after {
+        transform: translate(0, 0);
+        color: rgba(247, 231, 206, 0.7);
+      }
+
+      .portfolio-carousel .carousel-item {
+        padding: 2rem 0;
+      }
+
+      .portfolio-carousel .carousel-item img {
+        border-radius: 1.5rem;
+        border: 6px solid rgba(139, 94, 52, 0.5);
+        box-shadow: 0 10px 30px rgba(47, 79, 79, 0.35);
+        max-height: 480px;
+        object-fit: cover;
+      }
+
+      .testimonial {
+        background: linear-gradient(
+          130deg,
+          rgba(47, 79, 79, 0.95),
+          rgba(47, 79, 79, 0.55)
+        );
+        border-radius: 1.25rem;
+        padding: 2rem;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .testimonial::before {
+        content: "\201C";
+        position: absolute;
+        top: -1rem;
+        left: 1rem;
+        font-size: 8rem;
+        color: rgba(247, 231, 206, 0.1);
+      }
+
+      .woodgrain-overlay {
+        background-image: linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.08) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(0, 0, 0, 0.08) 50%,
+            rgba(0, 0, 0, 0.08) 75%,
+            transparent 75%,
+            transparent
+          ),
+          linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.08) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(0, 0, 0, 0.08) 50%,
+            rgba(0, 0, 0, 0.08) 75%,
+            transparent 75%,
+            transparent
+          );
+        background-size: 30px 30px;
+        opacity: 0.4;
+        mix-blend-mode: soft-light;
+      }
+
+      .offcanvas-backdrop.show {
+        backdrop-filter: blur(6px);
+      }
+
+      @media (max-width: 576px) {
+        .hero-section {
+          min-height: 60vh;
+          padding: 4rem 1rem;
+        }
+
+        .hero-section::after {
+          inset: 15% 10% 5%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg fixed-top py-3">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#">Mark the Master Carpenter</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#navMenu"
+          aria-controls="navMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end bg-dark text-white" tabindex="-1" id="navMenu">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Navigation</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav ms-lg-auto floating-menu nav nav-pills flex-column flex-lg-row gap-2 gap-lg-4">
+              <li class="nav-item"><a class="nav-link active" data-echo="Home" href="#home">Home</a></li>
+              <li class="nav-item"><a class="nav-link" data-echo="Services" href="#services">Services</a></li>
+              <li class="nav-item"><a class="nav-link" data-echo="Showcase" href="#showcase">Showcase</a></li>
+              <li class="nav-item"><a class="nav-link" data-echo="Craft" href="#craft">Craft</a></li>
+              <li class="nav-item"><a class="nav-link" data-echo="Testimonials" href="#testimonials">Testimonials</a></li>
+              <li class="nav-item"><a class="nav-link" data-echo="Contact" href="#contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section id="home" class="hero-section d-flex align-items-center">
+      <div class="container position-relative z-1">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <h1 class="display-4 fw-bold mb-3">Handcrafted Beauty in Every Grain</h1>
+            <p class="lead mb-4">
+              Mark brings architectural artistry to life with bespoke carpentry that bends wood, light, and space in unexpected ways. Experience a portfolio where tradition meets daring design.
+            </p>
+            <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+              <a class="btn btn-lg btn-light text-dark px-4" href="#showcase">View Portfolio</a>
+              <a class="btn btn-lg btn-outline-light px-4" href="#contact">Book a Consultation</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="py-5 bg-light angled-edge">
+      <div class="container">
+        <div class="row mb-5 align-items-center">
+          <div class="col-lg-7">
+            <h2 class="fw-bold text-uppercase text-secondary">Signature Services</h2>
+            <p class="text-muted">
+              From bespoke staircases to immersive timber interiors, each project is a conversation between craft and imagination. Explore a spectrum of services tailored to both contemporary and heritage spaces.
+            </p>
+          </div>
+          <div class="col-lg-5">
+            <div class="card bg-dark text-white border-0 shadow swing-card">
+              <div class="card-body">
+                <h5 class="card-title text-uppercase">Interactive Service Selector</h5>
+                <p class="card-text mb-3">Choose a focus to reveal project highlights.</p>
+                <ul class="nav nav-pills mb-3" id="services-tabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-joinery-tab" data-bs-toggle="pill" data-bs-target="#pills-joinery" type="button" role="tab" aria-controls="pills-joinery" aria-selected="true">Joinery</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-interiors-tab" data-bs-toggle="pill" data-bs-target="#pills-interiors" type="button" role="tab" aria-controls="pills-interiors" aria-selected="false">Interiors</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-restoration-tab" data-bs-toggle="pill" data-bs-target="#pills-restoration" type="button" role="tab" aria-controls="pills-restoration" aria-selected="false">Restoration</button>
+                  </li>
+                </ul>
+                <div class="tab-content" id="services-tabsContent">
+                  <div class="tab-pane fade show active" id="pills-joinery" role="tabpanel" aria-labelledby="pills-joinery-tab" tabindex="0">
+                    Sculptural staircases and floating shelving systems that use heat-treated timber to create seamless curves.
+                  </div>
+                  <div class="tab-pane fade" id="pills-interiors" role="tabpanel" aria-labelledby="pills-interiors-tab" tabindex="0">
+                    Atmospheric, wood-forward interiors with integrated lighting channels, modular partitions, and acoustic paneling.
+                  </div>
+                  <div class="tab-pane fade" id="pills-restoration" role="tabpanel" aria-labelledby="pills-restoration-tab" tabindex="0">
+                    Sensitive heritage restoration blending original joinery with modern reinforcements and hidden smart features.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card h-100 shadow border-0 swing-card">
+              <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                  <span class="badge bg-secondary rounded-pill px-3 py-2">01</span>
+                  <h5 class="ms-3 mb-0">Architectural Joinery</h5>
+                </div>
+                <p class="text-muted">Custom cabinetry, built-ins, and sculpted panels that follow the flow of each room.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow border-0 swing-card">
+              <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                  <span class="badge bg-secondary rounded-pill px-3 py-2">02</span>
+                  <h5 class="ms-3 mb-0">Creative Structures</h5>
+                </div>
+                <p class="text-muted">Outdoor studios, pavilions, and pergolas that shape light with layered timber lattices.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow border-0 swing-card">
+              <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                  <span class="badge bg-secondary rounded-pill px-3 py-2">03</span>
+                  <h5 class="ms-3 mb-0">Restoration &amp; Heritage</h5>
+                </div>
+                <p class="text-muted">Reinventing beloved spaces with reclaimed timbers and invisible structural reinforcement.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="showcase" class="py-5 angled-edge-bottom position-relative">
+      <div class="container">
+        <div class="row align-items-center mb-4">
+          <div class="col-lg-6">
+            <h2 class="fw-bold text-uppercase text-dark">Immersive Showcase</h2>
+            <p class="text-muted">Dive through the carousel to experience projects from multiple angles—optimized for both the palm of your hand and the expanse of a studio display.</p>
+          </div>
+          <div class="col-lg-6 text-lg-end">
+            <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#processModal">See The Process</button>
+          </div>
+        </div>
+        <div id="portfolioCarousel" class="carousel slide portfolio-carousel" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="5000">
+              <div class="row justify-content-center">
+                <div class="col-lg-8">
+                  <img class="w-100" src="https://images.unsplash.com/photo-1505691723518-36a5ac3be353?auto=format&fit=crop&w=1600&q=80" alt="Custom staircase" />
+                  <div class="mt-3 text-center">
+                    <h5>Ribbon Staircase with Integrated Lighting</h5>
+                    <p class="text-muted">Curved oak treads float on a hidden steel spine, lit with recessed copper channels.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="5000">
+              <div class="row justify-content-center">
+                <div class="col-lg-8">
+                  <img class="w-100" src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1600&q=80" alt="Bespoke kitchen" />
+                  <div class="mt-3 text-center">
+                    <h5>Sculpted Kitchen &amp; Dining Hub</h5>
+                    <p class="text-muted">Walnut cabinetry with fluid, handle-less fronts wraps around a marble culinary island.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="5000">
+              <div class="row justify-content-center">
+                <div class="col-lg-8">
+                  <img class="w-100" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1600&q=80" alt="Outdoor pavilion" />
+                  <div class="mt-3 text-center">
+                    <h5>Timber Pavilion Retreat</h5>
+                    <p class="text-muted">An airy framework of cedar louvers frames views while diffusing sunlight at every hour.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div class="position-absolute top-0 bottom-0 start-0 end-0 woodgrain-overlay d-none d-md-block"></div>
+    </section>
+
+    <section id="craft" class="py-5 bg-dark text-white">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="ratio ratio-16x9 rounded shadow overflow-hidden">
+              <iframe
+                src="https://www.youtube.com/embed/aL2hh2kNKb0"
+                title="Carpentry Craftsmanship"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <h2 class="text-uppercase">The Craft Philosophy</h2>
+            <p class="lead">Every piece Mark crafts is choreographed like a kinetic sculpture. Using steaming, bending, and carving techniques, he unlocks shapes that wood rarely offers willingly.</p>
+            <div class="accordion accordion-flush" id="craftAccordion">
+              <div class="accordion-item bg-dark text-white">
+                <h2 class="accordion-header" id="flush-headingOne">
+                  <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Material Alchemy
+                  </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#craftAccordion">
+                  <div class="accordion-body text-white-50">Custom lamination, charred shou sugi ban finishes, and reclaimed hardwoods for a timeless patina.</div>
+                </div>
+              </div>
+              <div class="accordion-item bg-dark text-white">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                  <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Digital Meets Handcrafted
+                  </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#craftAccordion">
+                  <div class="accordion-body text-white-50">3D scanning and CNC milling map the vision; hand tools perfect each detail for a human touch.</div>
+                </div>
+              </div>
+              <div class="accordion-item bg-dark text-white">
+                <h2 class="accordion-header" id="flush-headingThree">
+                  <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Sustainable Stewardship
+                  </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#craftAccordion">
+                  <div class="accordion-body text-white-50">Forest-friendly sourcing, zero-waste joinery, and natural finishes respect the environment.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="py-5 bg-light">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col text-center">
+            <h2 class="text-uppercase">Testimonials</h2>
+            <p class="text-muted">Crafted stories from clients whose spaces now tell their own tales.</p>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="testimonial">
+              <p>“Our penthouse transformed into a sanctuary of curves and light. The floating staircase is a daily piece of art.”</p>
+              <h6 class="mt-4 mb-0">Alexandra M.</h6>
+              <small>Interior Designer</small>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="testimonial">
+              <p>“Mark honored our 1850s townhouse with modern comforts without sacrificing character.”</p>
+              <h6 class="mt-4 mb-0">Graham &amp; Isla T.</h6>
+              <small>Townhouse Owners</small>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="testimonial">
+              <p>“The outdoor studio breathes with the surrounding forest. It feels alive with the seasons.”</p>
+              <h6 class="mt-4 mb-0">David R.</h6>
+              <small>Landscape Photographer</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-5 position-relative overflow-hidden">
+      <div class="container position-relative z-1">
+        <div class="row align-items-stretch g-4">
+          <div class="col-lg-6">
+            <div class="h-100 p-4 p-md-5 bg-dark text-white rounded-4 shadow">
+              <h2 class="text-uppercase mb-4">Book a Consultation</h2>
+              <form class="row g-3">
+                <div class="col-md-6">
+                  <label for="inputName" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="inputName" placeholder="Your Name" />
+                </div>
+                <div class="col-md-6">
+                  <label for="inputEmail" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com" />
+                </div>
+                <div class="col-12">
+                  <label for="inputProject" class="form-label">Project Vision</label>
+                  <textarea class="form-control" id="inputProject" rows="4" placeholder="Describe your dream build"></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label for="inputBudget" class="form-label">Budget Range</label>
+                  <select id="inputBudget" class="form-select">
+                    <option selected>Choose...</option>
+                    <option>$10k - $25k</option>
+                    <option>$25k - $60k</option>
+                    <option>$60k+</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="inputDate" class="form-label">Preferred Start</label>
+                  <input type="date" class="form-control" id="inputDate" />
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-outline-light w-100">Submit Request</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-6 d-flex">
+            <div class="card border-0 shadow flex-fill swing-card">
+              <div class="card-body">
+                <h3 class="text-uppercase text-secondary">Workshop Timeline</h3>
+                <div class="timeline mt-4">
+                  <div class="d-flex align-items-center mb-3">
+                    <span class="badge rounded-pill bg-dark me-3">Week 1</span>
+                    <p class="mb-0">Design deep-dive &amp; immersive 3D modeling.</p>
+                  </div>
+                  <div class="d-flex align-items-center mb-3">
+                    <span class="badge rounded-pill bg-dark me-3">Week 3</span>
+                    <p class="mb-0">Material selection, mock-ups, and finishing tests.</p>
+                  </div>
+                  <div class="d-flex align-items-center mb-3">
+                    <span class="badge rounded-pill bg-dark me-3">Week 5</span>
+                    <p class="mb-0">Fabrication in the workshop with live progress updates.</p>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <span class="badge rounded-pill bg-dark me-3">Week 8</span>
+                    <p class="mb-0">Installation, finishing touches, and walkthrough.</p>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <button class="btn btn-secondary w-100" data-bs-toggle="collapse" data-bs-target="#mapCollapse" aria-expanded="false" aria-controls="mapCollapse">View Workshop Map</button>
+                  <div class="collapse mt-3" id="mapCollapse">
+                    <div class="ratio ratio-4x3">
+                      <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25191.821593245698!2d-0.1421187582237448!3d51.50732197097592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDMwJzI2LjQiTiAxwrAwOCc0NC41Ilc!5e0!3m2!1sen!2suk!4v1616580960494!5m2!1sen!2suk"
+                        style="border: 0"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                      ></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="position-absolute top-0 start-50 translate-middle-x bg-warning rounded-circle" style="width: 220px; height: 220px; filter: blur(90px); opacity: 0.6"></div>
+      <div class="position-absolute bottom-0 end-0 bg-secondary rounded-circle" style="width: 180px; height: 180px; filter: blur(70px); opacity: 0.5"></div>
+    </section>
+
+    <footer class="py-4 bg-dark text-white text-center">
+      <div class="container small">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+          <span>&copy; <span id="year"></span> Mark the Master Carpenter</span>
+          <div class="btn-group" role="group" aria-label="social links">
+            <a class="btn btn-outline-light btn-sm" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Instagram">Instagram</a>
+            <a class="btn btn-outline-light btn-sm" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Pinterest">Pinterest</a>
+            <a class="btn btn-outline-light btn-sm" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="LinkedIn">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div class="modal fade" id="processModal" tabindex="-1" aria-labelledby="processModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="processModalLabel">From Blueprint to Build</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-4">
+              <div class="col-md-4">
+                <div class="border rounded-4 p-3 h-100 text-center">
+                  <h6 class="text-uppercase">Vision Sketching</h6>
+                  <p class="small">Collaborative sessions to shape ideas and map material palettes.</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="border rounded-4 p-3 h-100 text-center">
+                  <h6 class="text-uppercase">Precision Engineering</h6>
+                  <p class="small">Digital modeling and joint testing to ensure strength and beauty.</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="border rounded-4 p-3 h-100 text-center">
+                  <h6 class="text-uppercase">Installation Symphony</h6>
+                  <p class="small">On-site choreography with dustless tools and calm coordination.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+      [...tooltipTriggerList].map((tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl));
+    </script>
+  </body>
+</html>
