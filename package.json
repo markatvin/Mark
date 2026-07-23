@@ -1,0 +1,22 @@
+{
+  "name": "mark",
+  "version": "1.0.0",
+  "description": "Upload a video and enhance it with a local ffmpeg pass or an AI model (HuggingFace / Higsfield).",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:41729/git/markatvin/Mark"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "multer": "^2.2.0"
+  }
+}

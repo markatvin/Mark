@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Video Enhancer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Video Enhancer</h1>
+    <p>Upload a video, then enhance it with a local ffmpeg pass or an AI model.</p>
+  </header>
+
+  <main>
+    <section class="upload-row">
+      <label class="file-btn">
+        Choose a different video
+        <input id="file-input" type="file" accept="video/*" hidden />
+      </label>
+      <span id="file-name">sample-explosion-of-colour.mp4 (preloaded)</span>
+    </section>
+
+    <section class="actions">
+      <button id="btn-local" class="btn">Local Enhance (ffmpeg)</button>
+      <button id="btn-ai" class="btn btn-secondary">AI Enhance (HuggingFace)</button>
+      <button id="btn-higsfield" class="btn btn-secondary">AI Enhance (Higsfield)</button>
+    </section>
+
+    <p id="status"></p>
+
+    <section class="compare">
+      <div class="pane">
+        <h2>Original</h2>
+        <video id="original-video" controls playsinline></video>
+      </div>
+      <div class="pane">
+        <h2>Enhanced</h2>
+        <video id="enhanced-video" controls playsinline></video>
+        <a id="download-link" class="btn" style="display:none" download>Download enhanced video</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/script.js"></script>
+</body>
+</html>
