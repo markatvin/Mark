@@ -3,16 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nova — AI that works the way your team does</title>
-  <meta name="description" content="Nova is an AI workspace that automates busywork, answers questions from your own data, and plugs into the tools you already use." />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✦</text></svg>" />
+  <title>Nova — an AI workspace for how your team actually works</title>
+  <meta name="description" content="Nova is an AI workspace that answers questions from your own data, automates recurring work, and connects to the tools you already use." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><path d=%22M12 3c2 3 2 6 0 9-2-3-2-6 0-9zM3 12c3-2 6-2 9 0-3 2-6 2-9 0zm18 0c-3 2-6 2-9 0 3-2 6-2 9 0zM12 12c2 3 2 6 0 9-2-3-2-6 0-9z%22 fill=%22none%22 stroke=%22%232a2621%22 stroke-width=%221.5%22/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
+  <!-- botanical line-icon sprite: 1.5px stroke, no fill, no emoji -->
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <defs>
+      <symbol id="icon-mark" viewBox="0 0 24 24">
+        <path d="M12 3c2 3 2 6 0 9-2-3-2-6 0-9zM3 12c3-2 6-2 9 0-3 2-6 2-9 0zm18 0c-3 2-6 2-9 0 3-2 6-2 9 0zM12 12c2 3 2 6 0 9-2-3-2-6 0-9z" />
+      </symbol>
+      <symbol id="icon-search" viewBox="0 0 24 24">
+        <circle cx="10.5" cy="10.5" r="6.5" />
+        <path d="M15.4 15.4 21 21" stroke-linecap="round" />
+        <path d="M10.5 7c-2 0-3.5 1.5-3.5 3.5" stroke-linecap="round" />
+      </symbol>
+      <symbol id="icon-bolt" viewBox="0 0 24 24">
+        <path d="M13 3 5 13.5h5.5L11 21l8-11h-5.5z" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="icon-graft" viewBox="0 0 24 24">
+        <path d="M6 21V9c0-3 2-5 5-5" stroke-linecap="round" />
+        <path d="M18 21V13c0-2.5-1.8-4.5-4.5-4.5" stroke-linecap="round" />
+        <circle cx="6" cy="6" r="2" />
+        <circle cx="13.5" cy="6" r="2" />
+      </symbol>
+      <symbol id="icon-shield" viewBox="0 0 24 24">
+        <path d="M12 3.5 19 6v6c0 5-3 8-7 9.5C8 20 5 17 5 12V6z" stroke-linejoin="round" />
+        <path d="M9 12l2 2 4-4.5" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="icon-branch" viewBox="0 0 24 24">
+        <path d="M4 20c6-1 8-6 8-12M12 8c0-2.5 1.8-4.5 4.5-4.5M12 13c2.5 0 4.5-1.6 5.5-4M12 17c2 0 4-1 5-3" stroke-linecap="round" />
+      </symbol>
+      <symbol id="icon-chart" viewBox="0 0 24 24">
+        <path d="M4 20V9M11 20V4M18 20v-7" stroke-linecap="round" />
+        <path d="M2 20h20" stroke-linecap="round" />
+      </symbol>
+      <symbol id="icon-petal" viewBox="0 0 24 24">
+        <path d="M12 2c5 3 5 10 0 20C7 12 7 5 12 2z" />
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <path d="M4 12.5 9 17 20 6" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+    </defs>
+  </svg>
+
   <header class="site-header">
     <div class="container nav">
       <a href="#top" class="brand">
-        <span class="brand-mark">✦</span> Nova
+        <svg class="icon brand-mark" aria-hidden="true"><use href="#icon-mark" /></svg>
+        Nova
       </a>
       <nav class="nav-links" id="nav-links">
         <a href="#features">Features</a>
@@ -32,26 +76,31 @@
 
   <main id="top">
     <section class="hero">
+      <div class="hero-petals" aria-hidden="true">
+        <svg class="petal p1"><use href="#icon-petal" /></svg>
+        <svg class="petal p2"><use href="#icon-petal" /></svg>
+        <svg class="petal p3"><use href="#icon-petal" /></svg>
+        <svg class="petal p4"><use href="#icon-petal" /></svg>
+      </div>
       <div class="container hero-inner">
         <p class="eyebrow reveal">Now in public beta</p>
-        <h1 class="reveal">AI that works<br />the way your team does</h1>
+        <h1 class="reveal">An AI workspace built<br />around how you work</h1>
         <p class="hero-sub reveal">
-          Nova connects to your docs, tickets, and chats, then answers questions,
-          drafts work, and automates the repetitive stuff — without you writing a
-          single prompt template.
+          Nova reads from your docs, tickets, and chats, then answers questions,
+          drafts work, and automates what's repetitive. No prompt engineering
+          required.
         </p>
         <div class="hero-cta reveal">
           <a href="#get-started" class="btn btn-primary btn-lg">Start free</a>
           <a href="#how-it-works" class="btn btn-ghost btn-lg">See how it works</a>
         </div>
-        <p class="hero-note reveal">No credit card required &middot; Free for teams up to 5</p>
+        <p class="hero-note reveal">No credit card required · Free for teams up to five</p>
       </div>
-      <div class="hero-glow" aria-hidden="true"></div>
     </section>
 
     <section class="logos">
       <div class="container">
-        <p class="logos-label">Trusted by fast-moving teams at</p>
+        <p class="logos-label">Trusted by teams at</p>
         <div class="logos-row">
           <span>Northwind</span>
           <span>Vertex Labs</span>
@@ -64,38 +113,39 @@
 
     <section id="features" class="features">
       <div class="container">
-        <h2 class="section-title reveal">Everything your team needs, in one place</h2>
-        <p class="section-sub reveal">Nova isn't another chatbot bolted onto your stack — it's built around how work actually happens.</p>
+        <p class="kicker reveal">Features</p>
+        <h2 class="section-title reveal">Everything in one place</h2>
+        <p class="section-sub reveal">Nova is not a chatbot bolted onto your stack. It is built around how the work actually happens.</p>
         <div class="feature-grid">
           <article class="feature-card reveal">
-            <div class="feature-icon">🔎</div>
+            <svg class="icon feature-icon"><use href="#icon-search" /></svg>
             <h3>Answers from your own data</h3>
-            <p>Ask a question and get an answer sourced from your docs, wikis, and past conversations — with citations, not guesses.</p>
+            <p>Ask a question and get an answer sourced from your docs, wikis, and past conversations, with citations rather than guesses.</p>
           </article>
           <article class="feature-card reveal">
-            <div class="feature-icon">⚡</div>
+            <svg class="icon feature-icon"><use href="#icon-bolt" /></svg>
             <h3>Automates the busywork</h3>
-            <p>Turn a recurring task into an automation once, then let Nova handle triage, summaries, and follow-ups on its own.</p>
+            <p>Describe a recurring task once, and Nova handles the triage, the summaries, and the follow-ups on its own.</p>
           </article>
           <article class="feature-card reveal">
-            <div class="feature-icon">🔌</div>
-            <h3>Plugs into your stack</h3>
-            <p>Native integrations for the tools you already use, so Nova fits into existing workflows instead of replacing them.</p>
+            <svg class="icon feature-icon"><use href="#icon-graft" /></svg>
+            <h3>Grafts onto your stack</h3>
+            <p>Native connections to the tools you already use, so Nova fits into existing workflows instead of replacing them.</p>
           </article>
           <article class="feature-card reveal">
-            <div class="feature-icon">🛡️</div>
+            <svg class="icon feature-icon"><use href="#icon-shield" /></svg>
             <h3>Built for privacy</h3>
-            <p>Your data trains nothing but your own workspace. Granular permissions keep every answer scoped to who's asking.</p>
+            <p>Your data trains nothing outside your own workspace. Granular permissions keep every answer scoped to who is asking.</p>
           </article>
           <article class="feature-card reveal">
-            <div class="feature-icon">🧩</div>
+            <svg class="icon feature-icon"><use href="#icon-branch" /></svg>
             <h3>Custom workflows</h3>
-            <p>Chain steps together — retrieve, draft, review, send — with a visual builder that reads like plain English.</p>
+            <p>Chain steps together, retrieve, draft, review, send, with a visual builder that reads like plain sentences.</p>
           </article>
           <article class="feature-card reveal">
-            <div class="feature-icon">📈</div>
+            <svg class="icon feature-icon"><use href="#icon-chart" /></svg>
             <h3>Clear on impact</h3>
-            <p>See exactly how much time Nova is saving your team, broken down by workflow, person, and week.</p>
+            <p>See exactly how much time Nova is saving, broken down by workflow, person, and week.</p>
           </article>
         </div>
       </div>
@@ -103,13 +153,14 @@
 
     <section id="how-it-works" class="how">
       <div class="container">
+        <p class="kicker reveal">Process</p>
         <h2 class="section-title reveal">Up and running in an afternoon</h2>
         <p class="section-sub reveal">No data science team required.</p>
         <ol class="steps">
           <li class="step reveal">
             <span class="step-num">01</span>
             <h3>Connect your tools</h3>
-            <p>Link the apps your team already lives in. Nova indexes what's relevant and leaves the rest alone.</p>
+            <p>Link the apps your team already lives in. Nova indexes what is relevant and leaves the rest alone.</p>
           </li>
           <li class="step reveal">
             <span class="step-num">02</span>
@@ -119,7 +170,7 @@
           <li class="step reveal">
             <span class="step-num">03</span>
             <h3>Let it run</h3>
-            <p>Approve once, then Nova handles it going forward — surfacing anything that needs a human judgment call.</p>
+            <p>Approve once, and Nova handles it going forward, surfacing anything that needs a human judgment call.</p>
           </li>
         </ol>
       </div>
@@ -137,17 +188,18 @@
 
     <section id="pricing" class="pricing">
       <div class="container">
+        <p class="kicker reveal">Pricing</p>
         <h2 class="section-title reveal">Simple pricing, no surprises</h2>
-        <p class="section-sub reveal">Start free. Upgrade when Nova starts saving you real time.</p>
+        <p class="section-sub reveal">Start free. Upgrade once Nova is saving you real time.</p>
         <div class="pricing-grid">
           <div class="price-card reveal">
             <h3>Starter</h3>
             <p class="price">$0<span>/mo</span></p>
             <p class="price-desc">For small teams trying Nova out.</p>
             <ul>
-              <li>Up to 5 teammates</li>
-              <li>3 connected tools</li>
-              <li>100 AI actions / month</li>
+              <li>Up to five teammates</li>
+              <li>Three connected tools</li>
+              <li>100 AI actions per month</li>
               <li>Community support</li>
             </ul>
             <a href="#get-started" class="btn btn-ghost btn-full">Start free</a>
@@ -184,11 +236,12 @@
 
     <section id="faq" class="faq">
       <div class="container">
+        <p class="kicker reveal">FAQ</p>
         <h2 class="section-title reveal">Frequently asked questions</h2>
         <div class="faq-list">
           <details class="reveal">
             <summary>Does Nova train on our data?</summary>
-            <p>No. Your data is used only to answer questions and run workflows inside your own workspace — never to train shared models.</p>
+            <p>No. Your data is used only to answer questions and run workflows inside your own workspace, never to train shared models.</p>
           </details>
           <details class="reveal">
             <summary>What tools does Nova connect to?</summary>
@@ -196,11 +249,11 @@
           </details>
           <details class="reveal">
             <summary>Can I cancel anytime?</summary>
-            <p>Yes — plans are month to month with no lock-in, and you can export your workflows and data whenever you like.</p>
+            <p>Yes. Plans are month to month with no lock-in, and you can export your workflows and data whenever you like.</p>
           </details>
           <details class="reveal">
             <summary>Is there a free trial for the Team plan?</summary>
-            <p>Yes, every Team plan starts with a 14-day free trial, no credit card required to begin.</p>
+            <p>Yes, every Team plan starts with a 14-day free trial. No credit card required to begin.</p>
           </details>
         </div>
       </div>
@@ -209,7 +262,7 @@
     <section id="get-started" class="cta">
       <div class="container cta-inner reveal">
         <h2>Ready to give your team its time back?</h2>
-        <p>Set up your first Nova workflow in minutes — free for teams up to 5.</p>
+        <p>Set up your first Nova workflow in minutes. Free for teams up to five.</p>
         <form class="cta-form" id="signup-form" novalidate>
           <input type="email" id="signup-email" name="email" placeholder="you@company.com" autocomplete="email" required />
           <button type="submit" class="btn btn-primary btn-lg">Get started free</button>
@@ -222,8 +275,11 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <a href="#top" class="brand"><span class="brand-mark">✦</span> Nova</a>
-        <p>AI that works the way your team does.</p>
+        <a href="#top" class="brand">
+          <svg class="icon brand-mark" aria-hidden="true"><use href="#icon-mark" /></svg>
+          Nova
+        </a>
+        <p>An AI workspace built around how you work.</p>
       </div>
       <div class="footer-links">
         <div>
@@ -245,7 +301,7 @@
         </div>
       </div>
     </div>
-    <p class="footer-copy">&copy; 2026 Nova. All rights reserved.</p>
+    <p class="footer-copy">© 2026 Nova. All rights reserved.</p>
   </footer>
 
   <script src="/script.js"></script>
