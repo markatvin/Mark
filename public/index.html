@@ -2,45 +2,142 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Video Enhancer</title>
+  <title>Mark AI — Video Enhancer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Mark AI upscales, sharpens, and smooths your videos in the browser using local ffmpeg or hosted super-resolution models." />
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-  <header>
-    <h1>Video Enhancer</h1>
-    <p>Upload a video, then enhance it with a local ffmpeg pass or an AI model.</p>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="#top">
+      <span class="brand-mark">M</span>
+      <span>Mark <em>AI</em></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#demo" class="btn btn-small">Try the demo</a>
+    </nav>
   </header>
 
-  <main>
-    <section class="upload-row">
-      <label class="file-btn">
-        Choose a different video
-        <input id="file-input" type="file" accept="video/*" hidden />
-      </label>
-      <span id="file-name">sample-explosion-of-colour.mp4 (preloaded)</span>
+  <main id="top">
+    <section class="hero">
+      <p class="eyebrow">AI-powered video enhancement</p>
+      <h1>Turn ordinary footage into <span class="grad-text">crisp, upscaled video</span> in minutes.</h1>
+      <p class="hero-sub">
+        Mark AI cleans up noise, upscales resolution, and smooths motion — either instantly with a
+        local ffmpeg pipeline, or with hosted super-resolution models for the best possible detail.
+      </p>
+      <div class="hero-actions">
+        <a href="#demo" class="btn">Try it free</a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
+      </div>
+      <dl class="hero-stats">
+        <div><dt>2x</dt><dd>upscale on every pass</dd></div>
+        <div><dt>60fps</dt><dd>smoothed motion</dd></div>
+        <div><dt>0</dt><dd>signup required</dd></div>
+      </dl>
     </section>
 
-    <section class="actions">
-      <button id="btn-local" class="btn">Local Enhance (ffmpeg)</button>
-      <button id="btn-ai" class="btn btn-secondary">AI Enhance (HuggingFace)</button>
-      <button id="btn-higsfield" class="btn btn-secondary">AI Enhance (Higsfield)</button>
+    <section id="features" class="features">
+      <h2>Two ways to enhance, one workflow</h2>
+      <p class="section-sub">Pick the mode that fits your footage and your network.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Local Enhance</h3>
+          <p>
+            Runs entirely through ffmpeg on the server — no API key, no external calls.
+            Denoises, upscales 2x with Lanczos, sharpens, lifts contrast &amp; saturation,
+            and interpolates motion up to 60fps.
+          </p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">🧠</div>
+          <h3>AI Enhance</h3>
+          <p>
+            Extracts every frame and runs it through a hosted super-resolution model
+            (Swin2SR) via the HuggingFace Inference API, then reassembles the video
+            for the sharpest possible result.
+          </p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">🔌</div>
+          <h3>Bring your own model</h3>
+          <p>
+            The enhance pipeline is pluggable — point it at another inference provider
+            and swap in your own model without touching the upload or playback flow.
+          </p>
+        </article>
+      </div>
     </section>
 
-    <p id="status"></p>
+    <section id="how" class="how">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-num">1</span>
+          <div>
+            <h3>Upload a video</h3>
+            <p>Drop in your own clip, or start with the preloaded sample.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div>
+            <h3>Pick an enhance mode</h3>
+            <p>Local ffmpeg for speed and privacy, or AI super-resolution for maximum detail.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <div>
+            <h3>Compare and download</h3>
+            <p>Preview the original side-by-side with the enhanced result, then save it.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
 
-    <section class="compare">
-      <div class="pane">
-        <h2>Original</h2>
-        <video id="original-video" controls playsinline></video>
-      </div>
-      <div class="pane">
-        <h2>Enhanced</h2>
-        <video id="enhanced-video" controls playsinline></video>
-        <a id="download-link" class="btn" style="display:none" download>Download enhanced video</a>
-      </div>
+    <section id="demo" class="demo">
+      <h2>Try it now</h2>
+      <p class="section-sub">Runs against the live enhance pipeline below — no account needed.</p>
+
+      <section class="upload-row">
+        <label class="file-btn">
+          Choose a different video
+          <input id="file-input" type="file" accept="video/*" hidden />
+        </label>
+        <span id="file-name">sample-explosion-of-colour.mp4 (preloaded)</span>
+      </section>
+
+      <section class="actions">
+        <button id="btn-local" class="btn">Local Enhance (ffmpeg)</button>
+        <button id="btn-ai" class="btn btn-secondary">AI Enhance (HuggingFace)</button>
+        <button id="btn-higsfield" class="btn btn-secondary">AI Enhance (Higsfield)</button>
+      </section>
+
+      <p id="status"></p>
+
+      <section class="compare">
+        <div class="pane">
+          <h3>Original</h3>
+          <video id="original-video" controls playsinline></video>
+        </div>
+        <div class="pane">
+          <h3>Enhanced</h3>
+          <video id="enhanced-video" controls playsinline></video>
+          <a id="download-link" class="btn" style="display:none" download>Download enhanced video</a>
+        </div>
+      </section>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <p>Mark AI — a small tool for upscaling and cleaning up video, locally or with hosted AI models.</p>
+  </footer>
 
   <script src="/script.js"></script>
 </body>
