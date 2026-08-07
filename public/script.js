@@ -1,77 +1,61 @@
-const fileInput = document.getElementById('file-input');
-const fileName = document.getElementById('file-name');
-const originalVideo = document.getElementById('original-video');
-const enhancedVideo = document.getElementById('enhanced-video');
-const statusEl = document.getElementById('status');
-const downloadLink = document.getElementById('download-link');
+// Mobile nav toggle
+const navToggle = document.getElementById('nav-toggle');
+const siteHeader = document.querySelector('.site-header');
 
-const btnLocal = document.getElementById('btn-local');
-const btnAi = document.getElementById('btn-ai');
-const btnHigsfield = document.getElementById('btn-higsfield');
+if (navToggle && siteHeader) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = siteHeader.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
 
-let currentVideoUrl = null;
-
-async function loadSample() {
-  const res = await fetch('/api/sample');
-  const data = await res.json();
-  setCurrentVideo(data.url, 'sample-explosion-of-colour.mp4 (preloaded)');
-}
-
-function setCurrentVideo(url, label) {
-  currentVideoUrl = url;
-  originalVideo.src = url;
-  fileName.textContent = label;
-  enhancedVideo.removeAttribute('src');
-  downloadLink.style.display = 'none';
-  statusEl.textContent = '';
-}
-
-fileInput.addEventListener('change', async () => {
-  const file = fileInput.files[0];
-  if (!file) return;
-  statusEl.textContent = 'Uploading...';
-  const formData = new FormData();
-  formData.append('video', file);
-  const res = await fetch('/api/upload', { method: 'POST', body: formData });
-  const data = await res.json();
-  if (!res.ok) {
-    statusEl.textContent = `Upload failed: ${data.error}`;
-    return;
-  }
-  setCurrentVideo(data.url, file.name);
-});
-
-function setButtonsDisabled(disabled) {
-  btnLocal.disabled = disabled;
-  btnAi.disabled = disabled;
-  btnHigsfield.disabled = disabled;
-}
-
-async function enhance(mode, label) {
-  if (!currentVideoUrl) return;
-  setButtonsDisabled(true);
-  statusEl.textContent = `Running ${label}... this can take a while.`;
-  try {
-    const res = await fetch('/api/enhance', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ videoUrl: currentVideoUrl, mode }),
+  document.querySelectorAll('.nav-links a, .nav-actions a').forEach((link) => {
+    link.addEventListener('click', () => {
+      siteHeader.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Enhancement failed.');
-    enhancedVideo.src = data.url;
-    downloadLink.href = data.url;
-    downloadLink.style.display = 'inline-block';
-    statusEl.textContent = `${label} complete.`;
-  } catch (err) {
-    statusEl.textContent = `${label} failed: ${err.message}`;
-  } finally {
-    setButtonsDisabled(false);
-  }
+  });
 }
 
-btnLocal.addEventListener('click', () => enhance('local', 'Local Enhance (ffmpeg)'));
-btnAi.addEventListener('click', () => enhance('ai', 'AI Enhance (HuggingFace)'));
-btnHigsfield.addEventListener('click', () => enhance('higsfield', 'AI Enhance (Higsfield)'));
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
 
-loadSample();
+if ('IntersectionObserver' in window && revealEls.length) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  revealEls.forEach((el) => observer.observe(el));
+} else {
+  revealEls.forEach((el) => el.classList.add('is-visible'));
+}
+
+// Signup form
+const signupForm = document.getElementById('signup-form');
+const signupStatus = document.getElementById('signup-status');
+
+if (signupForm && signupStatus) {
+  signupForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const emailInput = document.getElementById('signup-email');
+    const email = emailInput.value.trim();
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (!isValid) {
+      signupStatus.textContent = 'Please enter a valid email address.';
+      signupStatus.classList.add('error');
+      return;
+    }
+
+    signupStatus.classList.remove('error');
+    signupStatus.textContent = `Thanks! We'll be in touch at ${email}.`;
+    signupForm.reset();
+  });
+}

@@ -1,6 +1,2 @@
 node_modules/
 .env
-public/processed/*
-!public/processed/.gitkeep
-public/uploads/*
-!public/uploads/sample-explosion-of-colour.mp4

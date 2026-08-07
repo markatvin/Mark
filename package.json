@@ -1,7 +1,7 @@
 {
-  "name": "mark",
+  "name": "nova-ai-landing",
   "version": "1.0.0",
-  "description": "Upload a video and enhance it with a local ffmpeg pass or an AI model (HuggingFace / Higsfield).",
+  "description": "Nova — a landing page for an AI product/workspace.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -15,8 +15,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "multer": "^2.2.0"
+    "express": "^5.2.1"
   }
 }

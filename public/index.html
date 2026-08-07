@@ -1,46 +1,252 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Video Enhancer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova — AI that works the way your team does</title>
+  <meta name="description" content="Nova is an AI workspace that automates busywork, answers questions from your own data, and plugs into the tools you already use." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✦</text></svg>" />
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-  <header>
-    <h1>Video Enhancer</h1>
-    <p>Upload a video, then enhance it with a local ffmpeg pass or an AI model.</p>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#top" class="brand">
+        <span class="brand-mark">✦</span> Nova
+      </a>
+      <nav class="nav-links" id="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="#get-started" class="btn btn-ghost">Sign in</a>
+        <a href="#get-started" class="btn btn-primary">Get started</a>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
 
-  <main>
-    <section class="upload-row">
-      <label class="file-btn">
-        Choose a different video
-        <input id="file-input" type="file" accept="video/*" hidden />
-      </label>
-      <span id="file-name">sample-explosion-of-colour.mp4 (preloaded)</span>
-    </section>
-
-    <section class="actions">
-      <button id="btn-local" class="btn">Local Enhance (ffmpeg)</button>
-      <button id="btn-ai" class="btn btn-secondary">AI Enhance (HuggingFace)</button>
-      <button id="btn-higsfield" class="btn btn-secondary">AI Enhance (Higsfield)</button>
-    </section>
-
-    <p id="status"></p>
-
-    <section class="compare">
-      <div class="pane">
-        <h2>Original</h2>
-        <video id="original-video" controls playsinline></video>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="eyebrow reveal">Now in public beta</p>
+        <h1 class="reveal">AI that works<br />the way your team does</h1>
+        <p class="hero-sub reveal">
+          Nova connects to your docs, tickets, and chats, then answers questions,
+          drafts work, and automates the repetitive stuff — without you writing a
+          single prompt template.
+        </p>
+        <div class="hero-cta reveal">
+          <a href="#get-started" class="btn btn-primary btn-lg">Start free</a>
+          <a href="#how-it-works" class="btn btn-ghost btn-lg">See how it works</a>
+        </div>
+        <p class="hero-note reveal">No credit card required &middot; Free for teams up to 5</p>
       </div>
-      <div class="pane">
-        <h2>Enhanced</h2>
-        <video id="enhanced-video" controls playsinline></video>
-        <a id="download-link" class="btn" style="display:none" download>Download enhanced video</a>
+      <div class="hero-glow" aria-hidden="true"></div>
+    </section>
+
+    <section class="logos">
+      <div class="container">
+        <p class="logos-label">Trusted by fast-moving teams at</p>
+        <div class="logos-row">
+          <span>Northwind</span>
+          <span>Vertex Labs</span>
+          <span>Fieldnote</span>
+          <span>Harbor</span>
+          <span>Kepler &amp; Co.</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div class="container">
+        <h2 class="section-title reveal">Everything your team needs, in one place</h2>
+        <p class="section-sub reveal">Nova isn't another chatbot bolted onto your stack — it's built around how work actually happens.</p>
+        <div class="feature-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon">🔎</div>
+            <h3>Answers from your own data</h3>
+            <p>Ask a question and get an answer sourced from your docs, wikis, and past conversations — with citations, not guesses.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">⚡</div>
+            <h3>Automates the busywork</h3>
+            <p>Turn a recurring task into an automation once, then let Nova handle triage, summaries, and follow-ups on its own.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">🔌</div>
+            <h3>Plugs into your stack</h3>
+            <p>Native integrations for the tools you already use, so Nova fits into existing workflows instead of replacing them.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">🛡️</div>
+            <h3>Built for privacy</h3>
+            <p>Your data trains nothing but your own workspace. Granular permissions keep every answer scoped to who's asking.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">🧩</div>
+            <h3>Custom workflows</h3>
+            <p>Chain steps together — retrieve, draft, review, send — with a visual builder that reads like plain English.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">📈</div>
+            <h3>Clear on impact</h3>
+            <p>See exactly how much time Nova is saving your team, broken down by workflow, person, and week.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="how">
+      <div class="container">
+        <h2 class="section-title reveal">Up and running in an afternoon</h2>
+        <p class="section-sub reveal">No data science team required.</p>
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step-num">01</span>
+            <h3>Connect your tools</h3>
+            <p>Link the apps your team already lives in. Nova indexes what's relevant and leaves the rest alone.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num">02</span>
+            <h3>Describe what you need</h3>
+            <p>Tell Nova, in plain language, what a workflow should do. It drafts the steps for you to review.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num">03</span>
+            <h3>Let it run</h3>
+            <p>Approve once, then Nova handles it going forward — surfacing anything that needs a human judgment call.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="testimonial">
+      <div class="container">
+        <blockquote class="reveal">
+          “We replaced four hours of weekly status-report writing with a single Nova
+          workflow. It just runs now, and it's more consistent than we ever were.”
+        </blockquote>
+        <p class="testimonial-attr reveal">— Head of Operations, Fieldnote</p>
+      </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+      <div class="container">
+        <h2 class="section-title reveal">Simple pricing, no surprises</h2>
+        <p class="section-sub reveal">Start free. Upgrade when Nova starts saving you real time.</p>
+        <div class="pricing-grid">
+          <div class="price-card reveal">
+            <h3>Starter</h3>
+            <p class="price">$0<span>/mo</span></p>
+            <p class="price-desc">For small teams trying Nova out.</p>
+            <ul>
+              <li>Up to 5 teammates</li>
+              <li>3 connected tools</li>
+              <li>100 AI actions / month</li>
+              <li>Community support</li>
+            </ul>
+            <a href="#get-started" class="btn btn-ghost btn-full">Start free</a>
+          </div>
+          <div class="price-card price-featured reveal">
+            <p class="price-badge">Most popular</p>
+            <h3>Team</h3>
+            <p class="price">$29<span>/mo per seat</span></p>
+            <p class="price-desc">For teams making Nova part of daily work.</p>
+            <ul>
+              <li>Unlimited teammates</li>
+              <li>Unlimited connected tools</li>
+              <li>Unlimited AI actions</li>
+              <li>Workflow automations</li>
+              <li>Priority support</li>
+            </ul>
+            <a href="#get-started" class="btn btn-primary btn-full">Start free trial</a>
+          </div>
+          <div class="price-card reveal">
+            <h3>Enterprise</h3>
+            <p class="price">Custom</p>
+            <p class="price-desc">For organizations with advanced security needs.</p>
+            <ul>
+              <li>SSO &amp; SCIM</li>
+              <li>Custom data retention</li>
+              <li>Dedicated support</li>
+              <li>Uptime SLA</li>
+            </ul>
+            <a href="#get-started" class="btn btn-ghost btn-full">Talk to sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <div class="container">
+        <h2 class="section-title reveal">Frequently asked questions</h2>
+        <div class="faq-list">
+          <details class="reveal">
+            <summary>Does Nova train on our data?</summary>
+            <p>No. Your data is used only to answer questions and run workflows inside your own workspace — never to train shared models.</p>
+          </details>
+          <details class="reveal">
+            <summary>What tools does Nova connect to?</summary>
+            <p>Nova integrates with common docs, chat, and ticketing tools, plus a general-purpose connector for anything with an API.</p>
+          </details>
+          <details class="reveal">
+            <summary>Can I cancel anytime?</summary>
+            <p>Yes — plans are month to month with no lock-in, and you can export your workflows and data whenever you like.</p>
+          </details>
+          <details class="reveal">
+            <summary>Is there a free trial for the Team plan?</summary>
+            <p>Yes, every Team plan starts with a 14-day free trial, no credit card required to begin.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="get-started" class="cta">
+      <div class="container cta-inner reveal">
+        <h2>Ready to give your team its time back?</h2>
+        <p>Set up your first Nova workflow in minutes — free for teams up to 5.</p>
+        <form class="cta-form" id="signup-form" novalidate>
+          <input type="email" id="signup-email" name="email" placeholder="you@company.com" autocomplete="email" required />
+          <button type="submit" class="btn btn-primary btn-lg">Get started free</button>
+        </form>
+        <p class="cta-status" id="signup-status" role="status" aria-live="polite"></p>
       </div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#top" class="brand"><span class="brand-mark">✦</span> Nova</a>
+        <p>AI that works the way your team does.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="#top">About</a>
+          <a href="#top">Careers</a>
+          <a href="#top">Contact</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="#top">Privacy</a>
+          <a href="#top">Terms</a>
+        </div>
+      </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nova. All rights reserved.</p>
+  </footer>
 
   <script src="/script.js"></script>
 </body>
