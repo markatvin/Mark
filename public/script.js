@@ -42,20 +42,45 @@ const signupForm = document.getElementById('signup-form');
 const signupStatus = document.getElementById('signup-status');
 
 if (signupForm && signupStatus) {
-  signupForm.addEventListener('submit', (event) => {
+  signupForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const emailInput = document.getElementById('signup-email');
     const email = emailInput.value.trim();
     const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
     if (!isValid) {
-      signupStatus.textContent = 'Please enter a valid email address.';
       signupStatus.classList.add('error');
+      signupStatus.textContent = 'Please enter a valid email address.';
       return;
     }
 
+    const submitBtn = signupForm.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
     signupStatus.classList.remove('error');
-    signupStatus.textContent = `Thanks! We'll be in touch at ${email}.`;
-    signupForm.reset();
+    signupStatus.textContent = 'Submitting…';
+
+    try {
+      const res = await fetch('/api/signup.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        signupStatus.classList.add('error');
+        signupStatus.textContent = data.error || 'Something went wrong. Please try again.';
+        return;
+      }
+
+      signupStatus.classList.remove('error');
+      signupStatus.textContent = data.message;
+      signupForm.reset();
+    } catch {
+      signupStatus.classList.add('error');
+      signupStatus.textContent = 'Could not reach the server. Please try again.';
+    } finally {
+      submitBtn.disabled = false;
+    }
   });
 }
